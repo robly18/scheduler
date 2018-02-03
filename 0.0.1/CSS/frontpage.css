@@ -1,0 +1,13 @@
+h1#thehead{
+	border: 2px solid black;
+	text-align:center;
+}
+
+h2#titler{
+	text-align: center;
+	text-decoration: underline;
+}
+
+p{
+	text-align: center;
+}
