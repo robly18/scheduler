@@ -2,59 +2,79 @@ package core
 
 import (
 	"errors"
-	"strconv"
-	"encoding/json"
+	//"encoding/json"
+	"time"
+	"fmt"
 )
 
-type Teacher struct {
-	Name string
-	Subject string
-	Id int
+type block struct {
+	Start time.Time
+	End time.Time //start and end time should be in the same day!
+	
+	Color int
+	Desc string
 }
-func (t Teacher) String() string {
-	return "Teacher " + t.Name + " teaches " + t.Subject + " (id="+strconv.Itoa(t.Id)+")"
+
+func MakeBlock(start, end time.Time, color int, desc string) (block, error) {
+	if start.Year() != end.Year() || start.YearDay() != end.YearDay() {
+		return block{}, errors.New("start and end date are not the same")
+	}
+	return block{start, end, color, desc}, nil
 }
+
+func (b block) String() string {
+	return fmt.Sprintf("Block date: %v/%v/%v; time: %v:%v to %v:%v; color: %v; desc: %v",
+						b.Start.Year(), b.Start.Month(), b.Start.Day(),
+										b.Start.Hour(), b.Start.Minute(),
+										b.End.Hour(), b.End.Minute(), b.Color, b.Desc)
+}
+
+var blockMap map[int]block = make(map[int]block)
+var currentId int = 0
+
+func AddBlock(b block) (int, error) {
+	for _,ok := blockMap[currentId]; ok ; _,ok = blockMap[currentId] {currentId++} //increments currentId until we find a free id
+	blockMap[currentId] = b
+	return currentId, nil
+}
+
+func RemoveById(id int) error {
+	_, ok := blockMap[id]
+	if !ok {
+		return errors.New("Id not found in blockMap")
+	}
+	delete(blockMap, id)
+	return nil
+}
+
+func GetBlockById(id int) (block, error) {
+	b, ok := blockMap[id]
+	if !ok {
+		return block{}, errors.New("Id not found in blockMap")
+	}
+	return b, nil
+}
+
+func IdList() []int {
+	list := make([]int, len(blockMap))
+	i := 0
+	for k := range blockMap {
+		list[i] = k
+		i++
+	}
+	return list
+}
+
+/*
 
 func (t Teacher) ToJsonDictionary() (string, error) {
 	s, err := json.Marshal(t)
 	return string(s), err
 }
 
-var teacherMap map[int]Teacher = make(map[int]Teacher)
-var currentId int = 0
 
-func AddTeacher(name, subject string) (string, error) {
-	for _,ok := teacherMap[currentId]; ok ; _,ok = teacherMap[currentId] {currentId++} //increments currentId until we find a free id
-	teacherMap[currentId] = Teacher{name, subject, currentId}
-	return strconv.Itoa(currentId), nil
-}
 
-func RemoveById(id int) (string, error) {
-	_, ok := teacherMap[id]
-	if !ok {
-		return "", errors.New("Id not found in teacherMap")
-	}
-	delete(teacherMap, id)
-	return "", nil
-}
 
-func GetTeacherById(id int) (Teacher, error) {
-	t, ok := teacherMap[id]
-	if !ok {
-		return Teacher{}, errors.New("Id not found in teacherMap")
-	}
-	return t, nil
-}
-
-func IdList() []int {
-	list := make([]int, len(teacherMap))
-	i := 0
-	for k := range teacherMap {
-		list[i] = k
-		i++
-	}
-	return list
-}
 
 func GetTeacherListJSON() (string, error) {
 	out := "["
@@ -66,4 +86,4 @@ func GetTeacherListJSON() (string, error) {
 		out += str + ","
 	}
 	return out[:len(out)-1] + "]", nil
-}
+}*/
