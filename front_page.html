@@ -1,0 +1,71 @@
+<html>
+<head>
+<script>
+function sendCommand(cmd, ongetresponsefunction) {
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.log(this.responseText);
+			if (ongetresponsefunction) ongetresponsefunction(this.responseText);
+		}
+	};
+	xhttp.open("POST", "sendCommand", true);
+	xhttp.send(cmd);
+}
+
+function addTeacher(name, subject) {
+	sendCommand("add \"" + name + "\" \"" + subject + "\"", refresh);
+}
+
+function removeTeacher(id) {
+	sendCommand("remove " + String(id), refresh);
+}
+
+function refresh() {
+	sendCommand("listJSON", postTeacherList);
+}
+
+function postTeacherList(listJSON /*as json string*/) {
+	let table = document.getElementById("teachers");
+	let list = JSON.parse(listJSON);
+	table.innerHTML = "<tr><th>Name</th><th>Subject</th></tr>";
+	
+	for (let i in list) {
+		let nr = table.insertRow();
+		let teacher = list[i];
+		nr.insertCell().innerHTML = teacher.Name;
+		nr.insertCell().innerHTML = teacher.Subject;
+		
+		let b = document.createElement("INPUT");
+		b.setAttribute("type", "button");
+		b.setAttribute("value", "X");
+		b.setAttribute("onclick", "removeTeacher("+String(teacher.Id)+")");
+		nr.insertCell().appendChild(b);
+	}
+}
+
+function printTeacher(teacher) {
+	return JSON.stringify(teacher);
+}
+</script>
+</head>
+<body>
+
+<h1>Mock project</h1>
+
+<input type="text" id="namebox">
+<input type="text" id="subjbox">
+<button onclick="addTeacher(namebox.value, subjbox.value)">Add</button>
+<br>
+<button onclick="refresh()">Refresh</button>
+<br>
+<table id="teachers"></table>
+
+<script>
+	var namebox = document.getElementById("namebox");
+	var subjbox = document.getElementById("subjbox");
+	
+	refresh();
+</script>
+</body>
+</html>
