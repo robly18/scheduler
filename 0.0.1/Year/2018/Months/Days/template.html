@@ -44,12 +44,21 @@
 				<th id="thborder">Domingo</th>
 			</tr>
 		</table>
-		
-		<form action="">
-			<input type="date" name="schedule">
-			<input type="time" name="alarm">
+		<form id="bottom" action="">
+			<select name="day">
+				<option value="Segunda">Segunda</option>
+				<option value="Terça">Terça</option>
+				<option value="Quarta">Quarta</option>
+				<option value="Quinta">Quinta</option>
+				<option value="Sexta">Sexta</option>
+				<option value="Sábado">Sábado</option>
+				<option value="Domingo">Domingo</option>
+			</select>
+			<input type="time" name="hour">
 			<input type="text" name="description">
 			<input type="submit" value="Submit">
 		</form>
+		
+		<script src="js/savescheduler.js"></script>
 	</body>
 </html>
