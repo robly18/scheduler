@@ -84,11 +84,37 @@ func runArgs(args []string) (string, error) {
 			out += "\n" + t.String()
 		}
 		return out, nil
-	/*case "listJSON":
-		if len(args) != 1 {
+	case "listDay": //list YEAR MONTH DAY
+		if len(args) != 4 {
 			return "", wrongArgNo()
 		}
-		return core.GetTeacherListJSON()*/
+		var aints [3]int
+		for i := 1; i != 4; i++ {
+			var err error
+			aints[i-1], err = strconv.Atoi(args[i])
+			if err != nil {
+				return "", err
+			}
+		}
+		dayblocks := core.GetBlocksInDay(aints[0], aints[1], aints[2])
+		out := ""
+		for _, b := range dayblocks {
+			out += b.String() + "\n"
+		}
+		return out, nil
+	case "listDayJSON": //listDayJSON YEAR MONTH DAY
+		if len(args) != 4 {
+			return "", wrongArgNo()
+		}
+		var aints [3]int
+		for i := 1; i != 4; i++ {
+			var err error
+			aints[i-1], err = strconv.Atoi(args[i])
+			if err != nil {
+				return "", err
+			}
+		}
+		return core.GetBlocksInDayJSON(aints[0], aints[1], aints[2])
 	default:
 		return "", notImplementedError()
 	}
