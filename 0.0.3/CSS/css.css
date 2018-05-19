@@ -22,3 +22,7 @@ div.addingContent {
 	float: right;
 	color: white;
 }
+
+div {
+	outline : 1px solid black;
+}
