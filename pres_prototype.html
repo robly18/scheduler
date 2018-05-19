@@ -1,0 +1,93 @@
+<html>
+
+<head>
+<meta charset="UTF8">
+<style>
+div.playground {
+	border : 0.2rem;
+	border-style : double;
+	background : blue;
+	height : 80%;
+}
+div.columncontainer {
+	height : 90%;
+	width : 20%;
+	margin : auto;
+}
+div.column {
+	border : 0.1rem;
+	border-style : dashed;
+	background : lime;
+	height : 100%;
+	width : 49%;
+	float : left;
+}
+</style>
+
+</head>
+
+<body style="min-height:100vh">
+<h1>Test sched presentation</h1>
+
+<div class="playground">
+<div class="columncontainer">
+<div class="column" id="times">
+</div>
+<div class="column" id="day">
+</div>
+</div>
+</div>
+
+<script>
+
+/*Add the markers for 9:00, 9:30, 10:00, 10:30 and so on*/
+var t = document.getElementById("times");
+for (var h = 8; h != 8+12; h++) {
+	var fst = document.createElement("div"); 
+	fst.appendChild(document.createTextNode(h + ":00"));
+	fst.style.backgroundColor = "white";
+	fst.style.height = "4.1666%";
+	t.appendChild(fst); //add the marker for h o'clock
+	
+	var snd = document.createElement("div");
+	snd.appendChild(document.createTextNode(h + ":30"));
+	snd.style.backgroundColor = "grey";
+	snd.style.height = "4.1666%";
+	t.appendChild(snd); //add the marker for h:30
+}
+
+var day = document.getElementById("day");
+function fillColumn(list) { /* list of {color, startpct, endpct, text} ordered with no overlap; color is optional and defaults to white */
+	var lastpct = 0; //where we left off
+	for (var block of list) {
+		if (block.startpct != lastpct) { //if we need padding, add it
+			let pad = document.createElement("div");
+			pad.style.backgroundColor = "grey";
+			pad.style.height = (block.startpct - lastpct)+"%";
+			day.appendChild(pad);
+		}
+		
+		let b = document.createElement("div"); //the actual block element
+		b.style.backgroundColor = block.color || "white";
+		b.style.height = (block.endpct - block.startpct)+"%";
+		for (var line of block.text) {
+			b.appendChild(document.createTextNode(line));
+			b.appendChild(document.createElement("BR"));
+		}
+		day.appendChild(b);
+		
+		lastpct = block.endpct;
+	}
+}
+
+var hpct = 100/12; //how many percent is an hour
+var mpct = 100/12 / 60; //how many percent is a minute
+
+fillColumn(
+ [{startpct: (9-8)*hpct + 30*mpct, endpct:(12-8)*hpct+50*mpct, text:["9:30 - 12:50","I told you this was possible!!"]},
+  {startpct:50, endpct:80, text:["this is a test, hello!"]}]
+);
+</script>
+</body>
+
+</html>
