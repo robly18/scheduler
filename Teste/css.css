@@ -1,0 +1,13 @@
+div.aTestingDiv{
+	width : 0%;
+	float : left;
+}
+
+div.testing{
+	width : 50%;
+	float : left;
+}
+
+div.container{
+	height : 80%;
+}
