@@ -1,0 +1,24 @@
+div.playground {
+	border : 0.2rem;
+	border-style : double;
+	background : blue;
+	height : 100%;
+}
+div.columncontainer {
+	height : 80.2%;
+	width : 80%;
+}
+
+div.column {
+	border : 0.1rem;
+	border-style : dashed;
+	background : lime;
+	height : 100%;
+	width : 11.5%;
+	float : left;
+}
+
+div.addingContent {
+	float: right;
+	color: white;
+}
