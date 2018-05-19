@@ -14,8 +14,8 @@ for (var h = 0; h != 24; h++) {
 	t.appendChild(snd); //add the marker for h:30
 }
 
-var day; // = document.getElementById("day");
-function fillColumn(list) { /* list of {color, startpct, endpct, text} ordered with no overlap; color is optional and defaults to white */
+
+function fillColumn(list, day) { /* list of {color, startpct, endpct, text} ordered with no overlap; color is optional and defaults to white */
 	var lastpct = 0; //where we left off
 	for (var block of list) {
 		if (block.startpct != lastpct) { //if we need padding, add it
@@ -38,77 +38,17 @@ function fillColumn(list) { /* list of {color, startpct, endpct, text} ordered w
 	}
 }
 
-
-
-var blocks1 = [];
-var blocks2 = [];
-var blocks3 = [];
-var blocks4 = [];
-var blocks5 = [];
-var blocks6 = [];
-var blocks7 = [];
+var blocks = [];
 document.getElementById("addButton").onclick = function()
 {
-	day = "day" + document.getElementById("dayInput").value;
-	var sticky = day;
-	day = document.getElementById(day);
 	var initialHour = document.getElementById("initialHour").value;
 	var initialMinute = document.getElementById("initialMinute").value;
 	var endHour = document.getElementById("endHour").value;
 	var endMinute = document.getElementById("endMinute").value;
-	switch (sticky)
-	{
-		case "day1":
-			blocks1.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
-			blocks1.sort((a, b) => (a.startpct) - (b.startpct));
-			day.innerHTML = "";
-			fillColumn(blocks1);
-			break;
-			
-		case "day2":
-			blocks2.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
-			blocks2.sort((a, b) => (a.startpct) - (b.startpct));
-			day.innerHTML = "";
-			fillColumn(blocks2);
-			break;
-			
-		case "day3":
-			blocks3.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
-			blocks3.sort((a, b) => (a.startpct) - (b.startpct));
-			day.innerHTML = "";
-			fillColumn(blocks3);
-			break;
-			
-		case "day4":
-			blocks4.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
-			blocks4.sort((a, b) => (a.startpct) - (b.startpct));
-			day.innerHTML = "";
-			fillColumn(blocks4);
-			break;
-			
-		case "day5":
-			blocks5.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
-			blocks5.sort((a, b) => (a.startpct) - (b.startpct));
-			day.innerHTML = "";
-			fillColumn(blocks5);
-			break;
-			
-		case "day6":
-			blocks6.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
-			blocks6.sort((a, b) => (a.startpct) - (b.startpct));
-			day.innerHTML = "";
-			fillColumn(blocks6);
-			break;
-		
-		case "day7":
-			blocks7.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
-			blocks7.sort((a, b) => (a.startpct) - (b.startpct));
-			day.innerHTML = "";
-			fillColumn(blocks7);
-			break;
-	}
-	
-	
+	blocks.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
+	day.innerHTML = "";
+	blocks.sort((a, b) => (a.startpct) - (b.startpct));
+	fillColumn(blocks);
 }
 
 var hpct = 5.2; //how many percent is an hour
