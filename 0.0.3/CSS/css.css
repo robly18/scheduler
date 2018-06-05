@@ -6,7 +6,7 @@ div.playground {
 }
 div.columncontainer {
 	height : 80.2%;
-	width : 80%;
+	width : 75%;
 }
 
 div.column {
@@ -22,6 +22,20 @@ div.addingContent {
 	float: right;
 	color: white;
 }
+
 div {
 	outline : 1px solid black;
+}
+
+div.clickableDiv {
+	cursor: pointer;
+}
+
+div.demonstrator {
+	float: right;
+	height: 18%;
+	width: 20%;
+	position: relative;
+	top: -80%;
+	background: white;
 }

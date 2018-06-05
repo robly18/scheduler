@@ -54,19 +54,31 @@ function preprocess(list) { //Returns preprocessed list ready to be sent to fill
 	return newlist.filter(block => block.startpct != block.endpct);
 }
 
+var i = 1;
 function fillColumn(list, day) { /* list of {color, startpct, endpct, text} ordered with no overlap; color is optional and defaults to white */
 	var lastpct = 0; //where we left off
 	for (var block of list) {
 		if (block.startpct != lastpct) { //if we need padding, add it
-			let pad = document.createElement("div");
+			let pad = document.createElement("div");			
 			pad.style.backgroundColor = "grey";
 			pad.style.height = (block.startpct - lastpct)+"%";
 			day.appendChild(pad);
 		}
 		
 		let b = document.createElement("div"); //the actual block element
+		b.setAttribute("id", "div"+i);
+		i = i+1;
+		b.className = "clickableDiv";
 		b.style.backgroundColor = block.color || "white";
 		b.style.height = (block.endpct - block.startpct)+"%";
+		
+		b.onclick = function()
+		{
+			var myDiv1 = document.getElementById(this.id);
+			var myDiv2 = document.getElementById("demonstrator");
+			myDiv2.innerHTML = myDiv1.innerHTML;
+		}
+		
 		for (var line of block.text) {
 			b.appendChild(document.createTextNode(line));
 			b.appendChild(document.createElement("BR"));
