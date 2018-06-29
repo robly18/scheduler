@@ -54,7 +54,7 @@ function preprocess(list) { //Returns preprocessed list ready to be sent to fill
 	return newlist.filter(block => block.startpct != block.endpct);
 }
 
-var i = 1;
+
 function fillColumn(list, day) { /* list of {color, startpct, endpct, text} ordered with no overlap; color is optional and defaults to white */
 	var lastpct = 0; //where we left off
 	for (var block of list) {
@@ -66,19 +66,19 @@ function fillColumn(list, day) { /* list of {color, startpct, endpct, text} orde
 		}
 		
 		var b = document.createElement("div"); //the actual block element
-		b.setAttribute("id", "div"+i);
-		var title = document.getElementById("Title").value;
-		var initialHour = document.getElementById("initialHour").value; //Javascript doesn't let me straight up attribute it so I have to do this stupid verbose thing.
-		var initialMinute = document.getElementById("initialMinute").value;
-		var endHour = document.getElementById("endHour").value;
-		var endMinute = document.getElementById("endMinute").value;
-		var description = document.getElementById("description").value;		
-		b.setAttribute("title", title);
-		b.setAttribute("initialHour", initialHour);
-		b.setAttribute("initialMinute", initialMinute);
-		b.setAttribute("endHour", endHour);
-		b.setAttribute("endMinute", endMinute);
-		b.setAttribute("description", description);
+		//b.setAttribute("id", "div"+i);
+		//var title = document.getElementById("Title").value;
+		//var initialHour = document.getElementById("initialHour").value; //Javascript doesn't let me straight up attribute it so I have to do this stupid verbose thing.
+		//var initialMinute = document.getElementById("initialMinute").value;
+		//var endHour = document.getElementById("endHour").value;
+		//var endMinute = document.getElementById("endMinute").value;
+		//var description = document.getElementById("description").value;		
+		//b.setAttribute("title", "test"+title);
+		//b.setAttribute("initialHour", initialHour);
+		//b.setAttribute("initialMinute", initialMinute);
+		//b.setAttribute("endHour", endHour);
+		//b.setAttribute("endMinute", endMinute);
+		//b.setAttribute("description", description);
 		
 		
 		b.className = "clickableDiv";
@@ -92,7 +92,7 @@ function fillColumn(list, day) { /* list of {color, startpct, endpct, text} orde
 			//myDiv2.innerHTML = myDiv1.innerHTML;
 			
 			//myDiv2.innerHTML = "Title: "+ b.getAttribute("title") + "<br>" + "Duration: " + b.getAttribute("initialHour") + ':' + b.getAttribute("initialMinute")+ ' - ' + b.getAttribute("endHour") + ':' + b.getAttribute("endMinute") + "<br>" + "Description: " + b.getAttribute("description");
-			myDiv2.innerHTML = "Title: "+ this.title;
+			//myDiv2.innerHTML = "Title: "+ this.title + "ID: " + this.id;
 			//text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]
 		}
 		
@@ -108,6 +108,7 @@ function fillColumn(list, day) { /* list of {color, startpct, endpct, text} orde
 }
 
 var blocks = [];
+var i = 1;
 
 document.getElementById("addButton").onclick = function()
 {
@@ -117,11 +118,12 @@ document.getElementById("addButton").onclick = function()
 	var endHour = document.getElementById("endHour").value;
 	var endMinute = document.getElementById("endMinute").value;
 	//blocks.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
-	blocks.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text: [title]});
+	blocks.push({id: title, startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text: [title]});
 	let day = document.getElementById("day1");
 	day.innerHTML = "";
 	blocks = preprocess(blocks);
 	fillColumn(blocks, day);
+	i = i+1;
 }
 
 var hourStart = 0;
