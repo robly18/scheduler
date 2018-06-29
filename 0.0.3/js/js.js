@@ -65,18 +65,35 @@ function fillColumn(list, day) { /* list of {color, startpct, endpct, text} orde
 			day.appendChild(pad);
 		}
 		
-		let b = document.createElement("div"); //the actual block element
+		var b = document.createElement("div"); //the actual block element
 		b.setAttribute("id", "div"+i);
-		i = i+1;
+		var title = document.getElementById("Title").value;
+		var initialHour = document.getElementById("initialHour").value; //Javascript doesn't let me straight up attribute it so I have to do this stupid verbose thing.
+		var initialMinute = document.getElementById("initialMinute").value;
+		var endHour = document.getElementById("endHour").value;
+		var endMinute = document.getElementById("endMinute").value;
+		var description = document.getElementById("description").value;		
+		b.setAttribute("title", title);
+		b.setAttribute("initialHour", initialHour);
+		b.setAttribute("initialMinute", initialMinute);
+		b.setAttribute("endHour", endHour);
+		b.setAttribute("endMinute", endMinute);
+		b.setAttribute("description", description);
+		
+		
 		b.className = "clickableDiv";
 		b.style.backgroundColor = block.color || "white";
 		b.style.height = (block.endpct - block.startpct)+"%";
 		
 		b.onclick = function()
 		{
-			var myDiv1 = document.getElementById(this.id);
+			//var myDiv1 = document.getElementById(this.id);
 			var myDiv2 = document.getElementById("demonstrator");
-			myDiv2.innerHTML = myDiv1.innerHTML;
+			//myDiv2.innerHTML = myDiv1.innerHTML;
+			
+			//myDiv2.innerHTML = "Title: "+ b.getAttribute("title") + "<br>" + "Duration: " + b.getAttribute("initialHour") + ':' + b.getAttribute("initialMinute")+ ' - ' + b.getAttribute("endHour") + ':' + b.getAttribute("endMinute") + "<br>" + "Description: " + b.getAttribute("description");
+			myDiv2.innerHTML = "Title: "+ this.title;
+			//text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]
 		}
 		
 		for (var line of block.text) {
@@ -86,6 +103,7 @@ function fillColumn(list, day) { /* list of {color, startpct, endpct, text} orde
 		day.appendChild(b);
 		
 		lastpct = block.endpct;
+		i = i+1;
 	}
 }
 
@@ -93,11 +111,13 @@ var blocks = [];
 
 document.getElementById("addButton").onclick = function()
 {
+	var title = document.getElementById("Title").value;
 	var initialHour = document.getElementById("initialHour").value;
 	var initialMinute = document.getElementById("initialMinute").value;
 	var endHour = document.getElementById("endHour").value;
 	var endMinute = document.getElementById("endMinute").value;
-	blocks.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
+	//blocks.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text:[initialHour+':'+initialMinute+' - '+ endHour+':'+endMinute, "Works?"]});
+	blocks.push({startpct: initialHour*hpct + initialMinute*mpct, endpct: endHour*hpct + endMinute*mpct, text: [title]});
 	let day = document.getElementById("day1");
 	day.innerHTML = "";
 	blocks = preprocess(blocks);
