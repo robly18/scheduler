@@ -47,6 +47,7 @@ function preprocess(list) { //Returns preprocessed list ready to be sent to fill
 				
 				newlist = head.concat([first, overlap, last]).concat(tail);
 			}
+			newlist.sort((a,b) => a.startpct-b.startpct);
 		}
 	}
 	return newlist.filter(b => b.startpct != b.endpct);
