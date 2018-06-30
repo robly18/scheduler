@@ -135,13 +135,16 @@ function listDiv(block) {
 	var d = document.createElement("div");
 	d.style.maxHeight = "100%";
 	d.style.overflow = "hidden";
-	//d.innerHTML = "Title: " + block.title + "<br> Duration: " block.startHour + ":" + block.startMinute + " - " + block.endHour + ":" + block.endMinute + "<br> Description: " block.desc;
+	d.style.whiteSpace = "nowrap";
+	d.style.textOverflow = "ellipsis";
 	var bTitle = document.createElement("p");
 	bTitle.innerHTML = "Title: " + block.title;
 	var bTime = document.createElement("p");
 	bTime.innerHTML = "Duration: "+ block.startHour + ":" + block.startMinute + " - "+ block.endHour + ":" + block.endMinute;
 	var bDesc = document.createElement("p");
 	bDesc.innerHTML = "Description: " + block.desc;
+	bDesc.style.overflow = "hidden";
+	bDesc.style.whiteSpace = "nowrap";
 	bDesc.style.textOverflow = "ellipsis";
 	
 	d.appendChild(bTitle);
