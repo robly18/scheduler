@@ -123,7 +123,7 @@ function displayBlocks(blocklist) {
 	if (blocklist.length == 0) {
 		demonstrator.innerHTML = "N/A";
 	} else if (blocklist.length == 1) {
-		demonstrator.innerHTML = "one dude, titled " + blocklist[0].title;
+		demonstrator.innerHTML = "one dude, titled " + blocklist[0].title + "<br>" + "Duration: " + blocklist[0].startHour + ":" + blocklist[0].startMinute + " - " + blocklist[0].endHour + ":" + blocklist[0].endMinute + "<br>" + "Description: " + blocklist[0].desc;
 	} else {
 		demonstrator.innerHTML = "more dudes";
 	}

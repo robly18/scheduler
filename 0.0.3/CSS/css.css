@@ -38,4 +38,5 @@ div.demonstrator {
 	position: relative;
 	top: -80%;
 	background: white;
+	overflow: auto;
 }
