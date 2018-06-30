@@ -151,7 +151,14 @@ function listDiv(block) {
 	d.appendChild(bTime);
 	d.appendChild(bDesc);
 	
+	d.style.cursor = "pointer";
+	d.onclick = () => displayBlock(block);
+	
 	return d;
+}
+
+function displayBlock(block){
+	demonstrator.innerHTML = "one dude, titled " + block.title + "<br>" + "Duration: " + block.startHour + ":" + block.startMinute + " - " + block.endHour + ":" + block.endMinute + "<br>" + "Description: " + block.desc;
 }
 
 var hourStart = 0;
