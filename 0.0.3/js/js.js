@@ -125,8 +125,15 @@ function displayBlocks(blocklist) {
 	} else if (blocklist.length == 1) {
 		demonstrator.innerHTML = "one dude, titled " + blocklist[0].title + "<br>" + "Duration: " + blocklist[0].startHour + ":" + blocklist[0].startMinute + " - " + blocklist[0].endHour + ":" + blocklist[0].endMinute + "<br>" + "Description: " + blocklist[0].desc;
 	} else {
-		demonstrator.innerHTML = "more dudes";
+		demonstrator.innerHTML = "";
+		for (block of blocklist) demonstrator.appendChild(listDiv(block));
 	}
+}
+
+function listDiv(block) {
+	var d = document.createElement("div");
+	d.innerHTML = "here lies " + block.title;
+	return d;
 }
 
 var hourStart = 0;
