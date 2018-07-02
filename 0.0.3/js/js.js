@@ -70,6 +70,7 @@ function fillColumn(list, day) { /* list of {color, startpct, endpct, linkedbloc
 		b.className = "clickableDiv";
 		b.style.backgroundColor = block.color || "white";
 		b.style.height = (block.endpct - block.startpct)+"%";
+		b.style.overflow = "hidden";
 		
 		let blocklist = block.linkedblocks;
 		b.onclick = () => displayBlocks(blocklist);
@@ -124,7 +125,7 @@ function displayBlocks(blocklist) {
 	if (blocklist.length == 0) {
 		demonstrator.innerHTML = "N/A";
 	} else if (blocklist.length == 1) {
-		demonstrator.innerHTML = "one dude, titled " + blocklist[0].title + "<br>" + "Duration: " + blocklist[0].startHour + ":" + blocklist[0].startMinute + " - " + blocklist[0].endHour + ":" + blocklist[0].endMinute + "<br>" + "Description: " + blocklist[0].desc;
+		displayBlock(blocklist[0]);
 	} else {
 		demonstrator.innerHTML = "";
 		for (block of blocklist) demonstrator.appendChild(listDiv(block));
@@ -156,7 +157,7 @@ function listDiv(block) {
 }
 
 function displayBlock(block){
-	demonstrator.innerHTML = "one dude, titled " + block.title + "<br>" + "Duration: " + block.startHour + ":" + block.startMinute + " - " + block.endHour + ":" + block.endMinute + "<br>" + "Description: " + block.desc;
+	demonstrator.innerHTML = "Title: " + block.title + "<br>" + "Duration: " + block.startHour + ":" + block.startMinute + " - " + block.endHour + ":" + block.endMinute + "<br>" + "Description: " + block.desc;
 }
 
 var hourStart = 0;
