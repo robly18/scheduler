@@ -34,8 +34,8 @@ func runArgs(args []string) (string, error) {
 		return "", nil
 	}
 	switch args[0] {
-	case "add": //add YEAR MONTH DAY STARTH STARTM ENDH ENDM DESC
-		if len(args) != 9 {
+	case "add": //add YEAR MONTH DAY STARTH STARTM ENDH ENDM TITLE DESC [-t TAG1 TAG2 ...] (todo tags and colors)
+		if len(args) != 10 {
 			return "", wrongArgNo()
 		}
 		var aints [7]int
@@ -48,7 +48,7 @@ func runArgs(args []string) (string, error) {
 		}
 		startDate := time.Date(aints[0], time.Month(aints[1]), aints[2], aints[3], aints[4], 0, 0, time.UTC) //For now, time is UTC
 		endDate := time.Date(aints[0], time.Month(aints[1]), aints[2], aints[5], aints[6], 0, 0, time.UTC)
-		b, err := core.MakeBlock(startDate, endDate, 0x0000FF, args[8])
+		b, err := core.MakeBlock(startDate, endDate, 0x0000FF, args[8], args[9], []string{})
 		if err != nil {
 			return "", err
 		}
@@ -64,6 +64,7 @@ func runArgs(args []string) (string, error) {
 		}
 		return "", core.RemoveById(id)
 	case "list": //list
+		//todo add flags for day, tags, format
 		if len(args) != 1 {
 			return "", wrongArgNo()
 		}
