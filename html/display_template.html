@@ -5,7 +5,8 @@
 	</head>
 
 	<body>
-		<h1>Testing</h1>
+		<h1>Displaying date {{.Year}}/{{.Month}}/{{.Day}}</h1> 
+		<button onclick="refreshDate({{.Year}},{{.Month}},{{.Day}})">Refresh display</button>
 		<div class="playground" id="playground">
 			<div class="columncontainer">
 				<div class="column" id="times"></div>
@@ -13,7 +14,7 @@
 			</div>
 			<div class="demonstrator" id="demonstrator">
 			</div>
-			<div class="addingContent" id =add">
+			<div class="addingContent" id ="add">
 					Title: <input type="text" name="Title" id="Title"><br>
 					Initial Hour: <input type="text" name="initialHour" id="initialHour"><br>
 					Initial Minute: <input type="text" name="initialMinute" id="initialMinute"><br>
@@ -26,11 +27,12 @@
 		<div>
 			Shtuff yo: <input type="text" id="consoleInput">
 			<button onclick="sendConsole()">Send command</button>
-			<button onclick="refresh()">Refresh display</button>
+			<button onclick="refreshDate({{.Year}},{{.Month}},{{.Day}})">Refresh display</button>
 		</div>
 		
 		
 		<script src="js/js.js"></script>
 		<script src="js/interface.js"></script>
+		<script>refreshDate({{.Year}},{{.Month}},{{.Day}})</script>
 	</body>
 </html>

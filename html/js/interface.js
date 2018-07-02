@@ -17,3 +17,11 @@ function sendConsole() { //temporary function, do not keep for too long
 	cnsl.value = "";
 	sendCommand(text, function(){alert("success");});
 }
+
+function refresh() { //deprecated
+	sendCommand("listDayJSON 2018 1 1", function(s) {blocks = JSON.parse(s); refreshBlocks();})
+}
+
+function refreshDate(year, month, day) {
+	sendCommand("listDayJSON " + year + " " + month + " " + day, function(s) {blocks = JSON.parse(s); refreshBlocks();})
+}
