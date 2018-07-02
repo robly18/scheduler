@@ -10,3 +10,10 @@ function sendCommand(cmd, ongetresponsefunction) {
 	xhttp.open("POST", "sendCommand", true);
 	xhttp.send(cmd);
 }
+
+function sendConsole() { //temporary function, do not keep for too long
+	let cnsl = document.getElementById("consoleInput");
+	let text = cnsl.value;
+	cnsl.value = "";
+	sendCommand(text, function(){alert("success");});
+}

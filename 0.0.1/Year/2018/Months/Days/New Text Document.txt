@@ -1,4 +1,0 @@
-[{year:2019, month:1, day:20, startHour:10, startMinute:0, endHour:12, endMinute:0, color:0xFF0000, desc:"blah"},
-{year:2019, month:1, day:20, startHour:9, startMinute:0, endHour:19, endMinute:0, color:0x0000FF, desc:"blah2"}]
-
-https://github.com/robly18/scheduler/wiki
