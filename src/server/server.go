@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"interpreter"
 	"html/template"
+	"strings"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -25,11 +26,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			if err != nil {
 				fmt.Printf("Error: %s", err.Error())
 			}
+			date := strings.Split(query["date"][0],"-")
 			data := struct {
 				Day string
 				Month string
 				Year string
-			} {query["day"][0], query["month"][0], query["year"][0]}
+			} {date[0], date[1], date[2]}
 			err = t.Execute(w, data)
 			if err != nil {
 				fmt.Printf("Error: %s", err.Error())
