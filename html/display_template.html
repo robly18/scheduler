@@ -21,8 +21,13 @@
 					End Hour: <input type="text" name="endHour" id="endHour"><br>
 					End Minute: <input type="text" name="endMinute" id="endMinute"><br>
 					Description: <input type="text" name="description" id="description"><br>
+					Tags: <input type="text" name="tags" id="tags"><br>
 					<button id="addButton">Insert</button>
-			</div>			
+			</div>
+			<div class="addingContent" id="search">
+				Tag Search: <input type="text" name="tagSearch" id="tagSearch"><br>
+				<button id="searchButton" onclick="filterTags()">Search</button>
+			</div>				
 		</div>
 		<div>
 			Shtuff yo: <input type="text" id="consoleInput">

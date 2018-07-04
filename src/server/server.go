@@ -31,7 +31,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				Day string
 				Month string
 				Year string
-			} {date[0], date[1], date[2]}
+			} {date[2], date[1], date[0]}
 			err = t.Execute(w, data)
 			if err != nil {
 				fmt.Printf("Error: %s", err.Error())

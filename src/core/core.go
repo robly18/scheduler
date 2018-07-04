@@ -92,6 +92,9 @@ func GetBlocksInDayJSON(year int, month int, day int) (string, error) {
 		}
 		out += str + ","
 	}
+	if out == "[" {
+		return "[]", nil
+	}
 	return out[:len(out)-1] + "]", nil
 }
 
