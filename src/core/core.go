@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"time"
 	"fmt"
+	"os"
+	"io/ioutil"
 )
 
 type block struct { //todo fix this: if something starts at midnight it counts as the previous day
@@ -119,4 +121,27 @@ func (b block) ToJsonDictionary() (string, error) { //see documentation for how 
 										b.End.Hour(), b.End.Minute(),
 						b.Color, string(title), string(desc), string(tags))
 	return str, err
+}
+
+func Save(filename string) error {
+	f, err := os.Create(filename);
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	s, err := json.Marshal(blockMap)
+	if err != nil {
+		return err
+	}
+	f.Write(s)
+	return nil
+}
+
+func Load(filename string) error {
+	bytes, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(bytes, &blockMap)
+	return err
 }

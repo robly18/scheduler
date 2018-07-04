@@ -116,6 +116,18 @@ func runArgs(args []string) (string, error) {
 			}
 		}
 		return core.GetBlocksInDayJSON(aints[0], aints[1], aints[2])
+	case "save": //save FILENAME
+		if len(args) != 2 {
+			return "", wrongArgNo()
+		}
+		core.Save(args[1]);
+		return "", nil
+	case "load": //load FILENAME
+		if len(args) != 2 {
+			return "", wrongArgNo()
+		}
+		core.Load(args[1]);
+		return "", nil
 	default:
 		return "", notImplementedError()
 	}
