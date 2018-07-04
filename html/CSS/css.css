@@ -1,7 +1,7 @@
 div.playground {
 	border : 0.2rem;
 	border-style : double;
-	background : blue;
+	background : #404040;
 	height : 100%;
 }
 div.columncontainer {
@@ -12,7 +12,7 @@ div.columncontainer {
 div.column {
 	border : 0.1rem;
 	border-style : dashed;
-	background : lime;
+	background : gray;
 	height : 100%;
 	width : 49.35%;
 	float : left;
