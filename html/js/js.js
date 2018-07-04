@@ -87,7 +87,7 @@ function fillColumn(list, day) { /* list of {color, startpct, endpct, linkedbloc
 var blocks = {};
 var currentId = 0;
 
-var displayElements = [];
+var blockCache = {};
 
 document.getElementById("addButton").onclick = function()
 {
@@ -97,30 +97,26 @@ document.getElementById("addButton").onclick = function()
 	var initialMinute = document.getElementById("initialMinute").value;
 	var endHour = document.getElementById("endHour").value;
 	var endMinute = document.getElementById("endMinute").value;
-	var tagString = document.getElementById("tag").value;
-	tagString = tagString.split(" ");
-	var tagArray = new Array();
-	for (var i = 0; i < tagString.length; i++)
-	{
-		tagArray.push(tagString[i]);
-	}
+	var tagString = document.getElementById("tags").value;
+	tags = tagString.split(";");
 	
 	blocks[currentId++] = { id: currentId,
 							year: 2018, month: 1, day: 1, startHour: initialHour, startMinute: initialMinute,
 															endHour: endHour,		endMinute: endMinute,
-							title: title, desc: desc, tags:[]};
-	refreshBlocks();
+							title: title, desc: desc, tags:tags};
+	refreshBlocks(blocks);
+	blockCache = blocks;
 }
 
-document.getElementById("searchButton").onclick = function()
-{
-	var tagSearched = document.getElementById("tagSearch");
-}
-
-function refreshBlocks() { //Takes the Object "blocks" and puts it on the screen.
+function refreshBlocks(blocks, tags) { //Takes an Object "blocks" and puts it on the screen. optionally, an array of tags to filter for
 	//begin by updating the array of display elements
-	displayElements = preprocess(
-						Object.values(blocks).map(
+	if (tags == undefined) tags = [];
+	var displayElements = preprocess(
+						Object.values(blocks)
+										.filter(
+										b => tags.every(t => b.tags.includes(t))
+										)
+										.map(
 										b => ({startpct: b.startHour*hpct + b.startMinute*mpct,
 										endpct: b.endHour*hpct + b.endMinute*mpct,
 										linkedblocks: [b]})
@@ -131,6 +127,11 @@ function refreshBlocks() { //Takes the Object "blocks" and puts it on the screen
 	day.innerHTML = "";
 	//and repopulate it
 	fillColumn(displayElements, day);
+}
+
+function filterTags() {
+	var tags = document.getElementById("tagSearch").value.split(";").filter(s => s != "");
+	refreshBlocks(blockCache, tags);
 }
 
 function displayBlocks(blocklist) {

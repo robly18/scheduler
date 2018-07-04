@@ -9,6 +9,7 @@ function sendCommand(cmd, ongetresponsefunction) {
 	};
 	xhttp.open("POST", "sendCommand", true);
 	xhttp.send(cmd);
+	console.log("sent command: " + cmd);
 }
 
 function sendConsole() { //temporary function, do not keep for too long
@@ -19,9 +20,9 @@ function sendConsole() { //temporary function, do not keep for too long
 }
 
 function refresh() { //deprecated
-	sendCommand("listDayJSON 2018 1 1", function(s) {blocks = JSON.parse(s); refreshBlocks();})
+	sendCommand("listDayJSON 2018 1 1", function(s) {refreshBlocks(JSON.parse(s));})
 }
 
 function refreshDate(year, month, day) {
-	sendCommand("listDayJSON " + year + " " + month + " " + day, function(s) {blocks = JSON.parse(s); refreshBlocks();})
+	sendCommand("listDayJSON " + year + " " + month + " " + day, function(s) {var b = JSON.parse(s); refreshBlocks(b); blockCache = b;})
 }
