@@ -97,11 +97,24 @@ document.getElementById("addButton").onclick = function()
 	var initialMinute = document.getElementById("initialMinute").value;
 	var endHour = document.getElementById("endHour").value;
 	var endMinute = document.getElementById("endMinute").value;
+	var tagString = document.getElementById("tag").value;
+	tagString = tagString.split(" ");
+	var tagArray = new Array();
+	for (var i = 0; i < tagString.length; i++)
+	{
+		tagArray.push(tagString[i]);
+	}
+	
 	blocks[currentId++] = { id: currentId,
 							year: 2018, month: 1, day: 1, startHour: initialHour, startMinute: initialMinute,
 															endHour: endHour,		endMinute: endMinute,
 							title: title, desc: desc, tags:[]};
 	refreshBlocks();
+}
+
+document.getElementById("searchButton").onclick = function()
+{
+	var tagSearched = document.getElementById("tagSearch");
 }
 
 function refreshBlocks() { //Takes the Object "blocks" and puts it on the screen.
