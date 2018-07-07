@@ -179,7 +179,11 @@ function displayBlock(block) {
 	bDuration.innerHTML = "Duration: " + block.startHour + ":" + block.startMinute.toString().padStart(2,'0') + " - " +
 										block.endHour + ":" + block.endMinute.toString().padStart(2,'0');
 	var bDescription = document.createElement("p");
-	bDescription.appendChild(document.createTextNode("Desc: " + block.desc)); //this should be safe from HTML injection.
+	bDescription.appendChild(document.createTextNode("Desc: "));
+	for (let line of block.desc.split("\n")) {
+		bDescription.appendChild(document.createTextNode(line)); //this should be safe from HTML injection.
+		bDescription.appendChild(document.createElement("br"));
+	}
 	
 	var bTags = document.createElement("p");
 	bTags.appendChild(document.createTextNode(block.tags.length == 0 ? "This block has no tags." : "Tags: " + block.tags.join("; ")));
