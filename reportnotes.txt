@@ -1,0 +1,23 @@
+criar um problema para a tua aplicação ser uma solução
+ou mencionar historico
+dar motivação basicamente
+
+queria aprender uma linguagem nova + resolver um problema
+
+meter em nome singular nos relatórios e etc
+
+mencionar a lingua (pt vs ing) e porquê
+
+mencionar port forwarding
+
+esquema de blocos?
+
+melhorar pagina de entrada; adicionar index
+adicionar user friendly shenanigan
+pagina por defeito = dia de hoje?
+diminuir a altura do schedule
+
+todo: when search for tag, deselect
+tirar os espaços nas tags
+todo show tags
+"encontrou X ocorrencias"
