@@ -170,8 +170,26 @@ function listDiv(block) {
 	return d;
 }
 
-function displayBlock(block){
-	demonstrator.innerHTML = "Title: " + block.title + "<br>" + "Duration: " + block.startHour + ":" + block.startMinute + " - " + block.endHour + ":" + block.endMinute + "<br>" + "Description: " + block.desc;
+function displayBlock(block) {
+	demonstrator.innerHTML = ""
+	var bTitle = document.createElement("h2");
+	bTitle.innerHTML = block.title;
+	bTitle.style.textAlign = "center";
+	var bDuration = document.createElement("p");
+	bDuration.innerHTML = "Duration: " + block.startHour + ":" + block.startMinute.toString().padStart(2,'0') + " - " +
+										block.endHour + ":" + block.endMinute.toString().padStart(2,'0');
+	var bDescription = document.createElement("p");
+	bDescription.appendChild(document.createTextNode("Desc: " + block.desc)); //this should be safe from HTML injection.
+	
+	var bTags = document.createElement("p");
+	bTags.appendChild(document.createTextNode(block.tags.length == 0 ? "This block has no tags." : "Tags: " + block.tags.join("; ")));
+	bTags.appendChild(document.createElement("br"));
+	bTags.appendChild(document.createTextNode("Block id: " + block.id));
+	
+	demonstrator.appendChild(bTitle);
+	demonstrator.appendChild(bDuration);
+	demonstrator.appendChild(bDescription);
+	demonstrator.appendChild(bTags);
 }
 
 var hourStart = 0;
