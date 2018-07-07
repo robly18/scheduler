@@ -149,36 +149,43 @@ function displayBlocks(blocklist) {
 function listDiv(block) {
 	
 	var d = document.createElement("div");
-	d.style.maxHeight = "25%";
-	d.style.overflow = "auto";
+	d.style.maxHeight = "33%";
 	var sidebar = document.createElement("div");
 	sidebar.style.float = "left"
 	sidebar.style.width = "0.8ex";
-	sidebar.style.height = "25%"
+	sidebar.style.height = "33%"
 	sidebar.style.backgroundColor = block.color;
 	var content = document.createElement("div");
+	content.style.overflow = "auto";
 	content.style.float = "right"
 	content.style.width = "calc(100% - 0.8ex)"
-	content.style.height = "25%"
-	content.style.padding = "1.5ex"
+	content.style.height = "33%"
+	content.style.paddingLeft = "1.5ex"
 	content.style.boxSizing = "border-box"
 	
-	var bTitle = document.createElement("p");
+	var bTitle = document.createElement("h3");
 	bTitle.innerHTML = "Title: " + block.title;
 	var bTime = document.createElement("p");
-	bTime.innerHTML = "Duration: "+ block.startHour + ":" + block.startMinute + " - "+ block.endHour + ":" + block.endMinute;
-	var bDesc = document.createElement("p");
-	bDesc.innerHTML = "Description: " + block.desc;
-	bDesc.style.overflow = "hidden";
-	bDesc.style.whiteSpace = "nowrap";
-	bDesc.style.textOverflow = "ellipsis";
+	bTime.innerHTML = "Duration: " + block.startHour + ":" + block.startMinute.toString().padStart(2,'0') + " - " +
+										block.endHour + ":" + block.endMinute.toString().padStart(2,'0');
+	var bDescription = document.createElement("p");
+	bDescription.appendChild(document.createTextNode("Desc: " + block.desc));
+	bDescription.style.overflow = "hidden";
+	bDescription.style.whiteSpace = "nowrap";
+	bDescription.style.textOverflow = "ellipsis";
 	
+	var bTags = document.createElement("p");
+	bTags.appendChild(document.createTextNode(block.tags.length == 0 ? "This block has no tags." : "Tags: " + block.tags.join("; ")));
+	bTags.appendChild(document.createElement("br"));
+	bTags.appendChild(document.createTextNode("Block id: " + block.id));
+
 	d.appendChild(sidebar);
 	d.appendChild(content);
 	
 	content.appendChild(bTitle);
 	content.appendChild(bTime);
-	content.appendChild(bDesc);
+	content.appendChild(bDescription);
+	content.appendChild(bTags);
 	
 	d.style.cursor = "pointer";
 	d.onclick = () => displayBlock(block);
