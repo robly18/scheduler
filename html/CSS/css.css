@@ -10,11 +10,12 @@ div.columncontainer {
 }
 
 div.column {
+	box-sizing: border-box;
 	border : 0.1rem;
 	border-style : dashed;
 	background : gray;
 	height : 100%;
-	width : 49.35%;
+	width : 50%;
 	float : left;
 }
 
