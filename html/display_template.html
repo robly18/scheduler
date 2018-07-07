@@ -6,7 +6,6 @@
 
 	<body>
 		<h1>Displaying date {{.Year}}/{{.Month}}/{{.Day}}</h1> 
-		<button onclick="refreshDate({{.Year}},{{.Month}},{{.Day}})">Refresh display</button>
 		<div class="playground" id="playground">
 			<div class="columncontainer">
 				<div class="column" id="times"></div>
@@ -16,10 +15,13 @@
 			</div>
 			<div class="addingContent" id="search">
 				Tag Search: <input type="text" name="tagSearch" id="tagSearch"><br>
-				<button id="searchButton" onclick="filterTags()">Search</button> <button id="searchButton" onclick="refreshBlocks(blockCache)">Clear tags</button>
+				<button id="searchButton" onclick="filterTags()">Search</button>
+				<button id="searchButton" onclick="document.getElementById('tagOutput').innerHTML = 'Cleared tags. ' + refreshBlocks(blockCache) + ' results';">Clear tags</button> <br>
+				<p style="margin:0" id="tagOutput"></p>
 			</div>				
 		</div>
 		
+		<button onclick="refreshDate({{.Year}},{{.Month}},{{.Day}})">Refresh display (debug)</button>
 		
 		<script src="js/js.js"></script>
 		<script src="js/interface.js"></script>

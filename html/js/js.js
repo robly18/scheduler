@@ -90,15 +90,15 @@ var currentId = 0;
 var blockCache = {};
 var selectedBlock = null;
 
-function refreshBlocks(blocks, tags) { //Takes an Object "blocks" and puts it on the screen. optionally, an array of tags to filter for
+function refreshBlocks(blocks, tags) { //Takes an Object "blocks" and puts it on the screen. optionally, an array of tags to filter for. returns number of found
 	//begin by updating the array of display elements
 	if (tags == undefined) tags = [];
-	var displayElements = preprocess(
-						Object.values(blocks)
+	var filteredBlocks = Object.values(blocks)
 										.filter(
 										b => tags.every(t => b.tags.includes(t))
-										)
-										.map(
+										);
+	var displayElements = preprocess(
+						filteredBlocks.map(
 										b => ({startpct: b.startHour*hpct + b.startMinute*mpct,
 										endpct: b.endHour*hpct + b.endMinute*mpct, color: b.color,
 										linkedblocks: [b]})
@@ -109,15 +109,17 @@ function refreshBlocks(blocks, tags) { //Takes an Object "blocks" and puts it on
 	day.innerHTML = "";
 	//and repopulate it
 	fillColumn(displayElements, day);
+	return filteredBlocks.length;
 }
 
 function filterTags() {
-	var tags = document.getElementById("tagSearch").value.split(";").filter(s => s != "");
-	refreshBlocks(blockCache, tags);
+	var tags = document.getElementById("tagSearch").value.split(" ").filter(s => s != "");
+	var resno = refreshBlocks(blockCache, tags);
 	if (selectedBlock == null || !tags.every(t => selectedBlock.tags.includes(t))) {
 		selectedBlock = null;
 		document.getElementById("demonstrator").innerHTML = "";
 	}
+	document.getElementById("tagOutput").innerHTML = "Found " + resno + (resno == 1 ? " result. " : " results.");
 }
 
 function displayBlocks(blocklist) {
