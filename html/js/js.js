@@ -88,25 +88,7 @@ var blocks = {};
 var currentId = 0;
 
 var blockCache = {};
-
-document.getElementById("addButton").onclick = function()
-{
-	var title = document.getElementById("Title").value;
-	var desc = document.getElementById("description").value;
-	var initialHour = document.getElementById("initialHour").value;
-	var initialMinute = document.getElementById("initialMinute").value;
-	var endHour = document.getElementById("endHour").value;
-	var endMinute = document.getElementById("endMinute").value;
-	var tagString = document.getElementById("tags").value;
-	tags = tagString.split(";");
-	
-	blocks[currentId++] = { id: currentId,
-							year: 2018, month: 1, day: 1, startHour: initialHour, startMinute: initialMinute,
-															endHour: endHour,		endMinute: endMinute,
-							title: title, desc: desc, tags:tags};
-	refreshBlocks(blocks);
-	blockCache = blocks;
-}
+var selectedBlock = null;
 
 function refreshBlocks(blocks, tags) { //Takes an Object "blocks" and puts it on the screen. optionally, an array of tags to filter for
 	//begin by updating the array of display elements
@@ -132,9 +114,14 @@ function refreshBlocks(blocks, tags) { //Takes an Object "blocks" and puts it on
 function filterTags() {
 	var tags = document.getElementById("tagSearch").value.split(";").filter(s => s != "");
 	refreshBlocks(blockCache, tags);
+	if (selectedBlock == null || !tags.every(t => selectedBlock.tags.includes(t))) {
+		selectedBlock = null;
+		document.getElementById("demonstrator").innerHTML = "";
+	}
 }
 
 function displayBlocks(blocklist) {
+	selectedBlock = null;
 	var demonstrator = document.getElementById("demonstrator");
 	if (blocklist.length == 0) {
 		demonstrator.innerHTML = "N/A";
@@ -233,6 +220,8 @@ function displayBlock(block) {
 	content.appendChild(bTags);
 	demonstrator.appendChild(sidebar)
 	demonstrator.appendChild(content);
+	
+	selectedBlock = block;
 }
 
 var hourStart = 0;
