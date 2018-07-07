@@ -46,7 +46,7 @@ func runArgs(args []string) (string, error) {
 		color := 0x0000FF //default color: blue
 		tags := []string{}
 		desc := ""
-		for i := 9; i < len(args); i++ {
+		for i := 8; i < len(args); i++ {
 			if args[i] == "-d" {
 				i++
 				desc = args[i]

@@ -169,7 +169,7 @@ function listDiv(block) {
 	bTime.innerHTML = "Duration: " + block.startHour + ":" + block.startMinute.toString().padStart(2,'0') + " - " +
 										block.endHour + ":" + block.endMinute.toString().padStart(2,'0');
 	var bDescription = document.createElement("p");
-	bDescription.appendChild(document.createTextNode("Desc: " + (block.desc ? block.desc : "N/A")));
+	bDescription.appendChild(document.createTextNode("Desc: " + block.desc));
 	bDescription.style.overflow = "hidden";
 	bDescription.style.whiteSpace = "nowrap";
 	bDescription.style.textOverflow = "ellipsis";
@@ -227,9 +227,7 @@ function displayBlock(block) {
 	
 	content.appendChild(bTitle);
 	content.appendChild(bDuration);
-	if (block.description) {
-		content.appendChild(bDescription);
-	}
+	content.appendChild(bDescription);
 	content.appendChild(bTags);
 	demonstrator.appendChild(sidebar)
 	demonstrator.appendChild(content);
