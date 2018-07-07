@@ -114,7 +114,7 @@ func (b block) ToJsonDictionary() (string, error) { //see documentation for how 
 		return "", err
 	}
 	str := fmt.Sprintf(`{"id":%v, "year":%v, "month":%v, "day":%v, "startHour":%v, "startMinute":%v, "endHour":%v, "endMinute":%v,`+
-						`"color":%v, "title":%v, "desc":%v, "tags":%v}`,
+						`"color":"#%06X", "title":%v, "desc":%v, "tags":%v}`,
 						b.Id,
 						b.Start.Year(), int(b.Start.Month()), b.Start.Day(),
 										b.Start.Hour(), b.Start.Minute(),

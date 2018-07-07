@@ -118,7 +118,7 @@ function refreshBlocks(blocks, tags) { //Takes an Object "blocks" and puts it on
 										)
 										.map(
 										b => ({startpct: b.startHour*hpct + b.startMinute*mpct,
-										endpct: b.endHour*hpct + b.endMinute*mpct,
+										endpct: b.endHour*hpct + b.endMinute*mpct, color: b.color,
 										linkedblocks: [b]})
 										)
 					);
