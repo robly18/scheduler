@@ -7,6 +7,8 @@ import (
 	"interpreter"
 	"html/template"
 	"strings"
+	"bufio"
+	"os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -48,7 +50,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Printf("Insert port: ")
+	inp, _ := reader.ReadString('\n')
+	fmt.Printf(inp)
 	http.HandleFunc("/", handler)
 	fmt.Printf("server up\n")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+strings.TrimRight(inp, "\r\n"), nil)
 }
