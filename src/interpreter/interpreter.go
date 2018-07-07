@@ -39,14 +39,18 @@ func runArgs(args []string) (string, error) {
 		return "", nil
 	}
 	switch args[0] {
-	case "add": //add YEAR MONTH DAY STARTH STARTM ENDH ENDM TITLE DESC [-c COLOR] [-t TAG1 TAG2 ...]
-		if len(args) < 10 {
+	case "add": //add YEAR MONTH DAY STARTH STARTM ENDH ENDM TITLE [-d DESC] [-c COLOR] [-t TAG1 TAG2 ...]
+		if len(args) < 9 {
 			return "", wrongArgNo()
 		}
 		color := 0x0000FF //default color: blue
 		tags := []string{}
-		for i := 10; i < len(args); i++ {
-			if args[i] == "-c" {
+		desc := ""
+		for i := 8; i < len(args); i++ {
+			if args[i] == "-d" {
+				i++
+				desc = args[i]
+			} else if args[i] == "-c" {
 				i++
 				c64, err := strconv.ParseInt(args[i], 16, 0)
 				if err != nil {
@@ -71,7 +75,7 @@ func runArgs(args []string) (string, error) {
 		}
 		startDate := time.Date(aints[0], time.Month(aints[1]), aints[2], aints[3], aints[4], 0, 0, time.UTC) //For now, time is UTC
 		endDate := time.Date(aints[0], time.Month(aints[1]), aints[2], aints[5], aints[6], 0, 0, time.UTC)
-		b, err := core.MakeBlock(startDate, endDate, color, args[8], args[9], tags)
+		b, err := core.MakeBlock(startDate, endDate, color, args[8], desc, tags)
 		if err != nil {
 			return "", err
 		}
