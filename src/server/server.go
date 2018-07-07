@@ -9,6 +9,7 @@ import (
 	"strings"
 	"bufio"
 	"os"
+	"time"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +18,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 		fmt.Printf("Got request at IP %v for path %v with query %v\n", r.RemoteAddr, path, r.URL.Query())
-		if path != "/display" {
+		if path == "/" {
+			now := time.Now();
+			fmt.Printf("/display?date=%v-%02v-%02v", now.Year(), int(now.Month()), now.Day())
+			http.Redirect(w, r, fmt.Sprintf("/display?date=%v-%v-%v", now.Year(), int(now.Month()), now.Day()), 302)
+		} else if path != "/display" {
 			body, err := ioutil.ReadFile(fmt.Sprintf("html/%v",path))
 			if err != nil {
 				fmt.Printf("Error: %s", err.Error())
