@@ -147,9 +147,22 @@ function displayBlocks(blocklist) {
 }
 
 function listDiv(block) {
+	
 	var d = document.createElement("div");
-	d.style.maxHeight = "100%";
+	d.style.maxHeight = "25%";
 	d.style.overflow = "auto";
+	var sidebar = document.createElement("div");
+	sidebar.style.float = "left"
+	sidebar.style.width = "0.8ex";
+	sidebar.style.height = "25%"
+	sidebar.style.backgroundColor = block.color;
+	var content = document.createElement("div");
+	content.style.float = "right"
+	content.style.width = "calc(100% - 0.8ex)"
+	content.style.height = "25%"
+	content.style.padding = "1.5ex"
+	content.style.boxSizing = "border-box"
+	
 	var bTitle = document.createElement("p");
 	bTitle.innerHTML = "Title: " + block.title;
 	var bTime = document.createElement("p");
@@ -160,9 +173,12 @@ function listDiv(block) {
 	bDesc.style.whiteSpace = "nowrap";
 	bDesc.style.textOverflow = "ellipsis";
 	
-	d.appendChild(bTitle);
-	d.appendChild(bTime);
-	d.appendChild(bDesc);
+	d.appendChild(sidebar);
+	d.appendChild(content);
+	
+	content.appendChild(bTitle);
+	content.appendChild(bTime);
+	content.appendChild(bDesc);
 	
 	d.style.cursor = "pointer";
 	d.onclick = () => displayBlock(block);
@@ -172,6 +188,18 @@ function listDiv(block) {
 
 function displayBlock(block) {
 	demonstrator.innerHTML = ""
+	var sidebar = document.createElement("div");
+	sidebar.style.float = "left"
+	sidebar.style.width = "0.8ex";
+	sidebar.style.height = "100%"
+	sidebar.style.backgroundColor = block.color;
+	var content = document.createElement("div");
+	content.style.float = "right"
+	content.style.width = "calc(100% - 0.8ex)"
+	content.style.height = "100%"
+	content.style.padding = "1.5ex"
+	content.style.boxSizing = "border-box"
+	
 	var bTitle = document.createElement("h2");
 	bTitle.innerHTML = block.title;
 	bTitle.style.textAlign = "center";
@@ -190,10 +218,12 @@ function displayBlock(block) {
 	bTags.appendChild(document.createElement("br"));
 	bTags.appendChild(document.createTextNode("Block id: " + block.id));
 	
-	demonstrator.appendChild(bTitle);
-	demonstrator.appendChild(bDuration);
-	demonstrator.appendChild(bDescription);
-	demonstrator.appendChild(bTags);
+	content.appendChild(bTitle);
+	content.appendChild(bDuration);
+	content.appendChild(bDescription);
+	content.appendChild(bTags);
+	demonstrator.appendChild(sidebar)
+	demonstrator.appendChild(content);
 }
 
 var hourStart = 0;
