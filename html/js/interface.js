@@ -12,11 +12,12 @@ function sendCommand(cmd, ongetresponsefunction) {
 	console.log("sent command: " + cmd);
 }
 
-function sendConsole() { //temporary function, do not keep for too long
+function sendConsole(callback) {
+	callback = callback || function(){};
 	let cnsl = document.getElementById("consoleInput");
 	let text = cnsl.value;
 	cnsl.value = "";
-	sendCommand(text, function(){alert("success");});
+	sendCommand(text, callback);
 }
 
 function refresh() { //deprecated
