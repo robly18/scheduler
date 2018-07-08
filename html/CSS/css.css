@@ -41,3 +41,8 @@ div.demonstrator {
 	background: white;
 	overflow: auto;
 }
+
+h1.headline{
+	margin: 0;
+	display: inline-block;
+}

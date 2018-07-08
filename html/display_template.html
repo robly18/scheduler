@@ -5,10 +5,15 @@
 	</head>
 
 	<body>
-		<button type="button"> < </button>
-		<h1>Displaying date {{.Year}}/{{.Month}}/{{.Day}}</h1> 
-		<button type="button"> > </button><br><br>
+		<div>
+			
+			<h1 id="headline"> <button type="button"> < </button>Displaying date {{.Year}}/{{.Month}}/{{.Day}} <button type="button"> > </button></h1> 
+			<br><br>
+		</div>
+		
 		<input id="date" type="date"> <button type="button">Go</button><br><br>
+		
+		<a href="helpPage.html">Lost?  Click me!</a><br><br>
 		
 		<div class="playground" id="playground">
 			<div class="columncontainer">
@@ -44,6 +49,6 @@
 	</body>
 	
 	<footer>
-		<p>Lost?</p><a href="helpPage.html"> Click me!</a>
+		
 	</footer>
 </html>
