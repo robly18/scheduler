@@ -7,13 +7,18 @@
 	<body>
 		<div>
 			
-			<h1 id="headline"> <button type="button"> < </button>Displaying date {{.Year}}/{{.Month}}/{{.Day}} <button type="button"> > </button></h1> 
-			<br><br>
+			<h1 id="headline">Displaying date {{.Year}}/{{.Month}}/{{.Day}}</h1> 
+			 <button type="button"> Yesterday </button>
+			 <form action="/display" style="display:inline; margin:4ex">
+				<input type="submit" value="Go to date:">
+				<input name="date" type="date">
+			</form>
+			<button type="button"> Tomorrow </button>
 		</div>
 		
-		<input id="date" type="date"> <button type="button">Go</button><br><br>
 		
-		<a href="helpPage.html">Lost?  Click me!</a><br><br>
+		<a href="helpPage.html">Lost?  Click me!</a>
+		<br>
 		
 		<div class="playground" id="playground">
 			<div class="columncontainer">
@@ -23,29 +28,29 @@
 			<div class="demonstrator" id="demonstrator">
 			</div>
 			<div class="addingContent" id ="add">
-				<p>Data Insertion</p>
-				<div>
+				<p>Schedule an event</p>
+				<form onsubmit="if (insertEvent()) this.reset(); return false;">
 					Title: <input id="title" type="text"><br>
-					Horas: <input id="initialHour" type="time"> - <input id="finalHour" type="time"><br>
+					Time: <input id="initialHour" type="time"> - <input id="finalHour" type="time"><br>
 					Description: <input id="description" type="text"><br>
-					Color: <input id="color" type="color"><br>
+					Color: <input id="color" type="color" value="#ffffff"><br>
 					Tags: <input id="tags" type="text"><br>
-					<button type="button" style="">Insert</button>
-				</div>
-			</div>		
+					<input type="submit" value="Insert">
+				</form>
+			</div>
 			<div class="addingContent" id="search">
 				Tag Search: <input type="text" name="tagSearch" id="tagSearch"><br>
 				<button id="searchButton" onclick="filterTags()">Search</button>
 				<button id="searchButton" onclick="document.getElementById('tagOutput').innerHTML = 'Cleared tags. ' + refreshBlocks(blockCache) + ' results';">Clear tags</button> <br>
 				<p style="margin:0" id="tagOutput"></p>
-			</div>				
+			</div>
 		</div>
 		
 		<button onclick="refreshDate({{.Year}},{{.Month}},{{.Day}})">Refresh display (debug)</button>
 		
 		<script src="js/js.js"></script>
 		<script src="js/interface.js"></script>
-		<script>refreshDate({{.Year}},{{.Month}},{{.Day}})</script>
+		<script>refreshDate({{.Year}},{{.Month}},{{.Day}}); const date = "{{.Year}} {{.Month}} {{.Day}}";</script>
 	</body>
 	
 	<footer>

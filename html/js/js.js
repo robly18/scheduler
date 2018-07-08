@@ -216,7 +216,7 @@ function displayBlock(block) {
 	
 	content.appendChild(bTitle);
 	content.appendChild(bDuration);
-	if (block.description) {
+	if (block.desc != "") {
 		content.appendChild(bDescription);
 	}
 	content.appendChild(bTags);
@@ -224,6 +224,22 @@ function displayBlock(block) {
 	demonstrator.appendChild(content);
 	
 	selectedBlock = block;
+}
+
+function insertEvent() {
+	var title = JSON.stringify(document.getElementById("title").value).slice(1,-1); //escaping the string
+	if (title == "") return false;
+	var start = document.getElementById("initialHour").value.split(":").join(" ");
+	if (start == "") return false;
+	var end = document.getElementById("finalHour").value.split(":").join(" ");
+	if (end == "") return false;
+	var desc = JSON.stringify(document.getElementById("description").value).slice(1,-1);
+	var color = document.getElementById("color").value;
+	var tags = document.getElementById("tags").value;
+	var optdesc = desc == "" ? "" : "-d \"" + desc + "\"";
+	var command = "add " + date + " " + start + " " + end + " \"" + title + "\" " + optdesc + " -c " + color.slice(1) + " -t " + tags;
+	sendCommand(command, () => 	refreshDate.apply(null, date.split(" ")));
+	return true;
 }
 
 var hourStart = 0;
@@ -237,12 +253,14 @@ for (var h = hourStart; h != hourEnd; h++) {
 	fst.appendChild(document.createTextNode(h + ":00"));
 	fst.style.backgroundColor = "white";
 	fst.style.height = hpct/2 + "%";
+	fst.className = "time";
 	t.appendChild(fst); //add the marker for h o'clock
 	
 	var snd = document.createElement("div");
 	snd.appendChild(document.createTextNode(h + ":30"));
 	snd.style.backgroundColor = "grey";
 	snd.style.height = hpct/2 + "%";
+	snd.className = "time";
 	t.appendChild(snd); //add the marker for h:30
 }
-document.getElementById("playground").style.height = ((hourEnd - hourStart)*2 * 2) + "em";
+document.getElementById("playground").style.height = ((hourEnd - hourStart)*1 * 2) + "em";

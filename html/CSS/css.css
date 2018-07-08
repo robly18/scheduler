@@ -2,11 +2,10 @@ div.playground {
 	border : 0.2rem;
 	border-style : double;
 	background : #404040;
-	height : 100%;
 }
 div.columncontainer {
-	height : 80.2%;
 	width : 25%;
+	float:left;
 }
 
 div.column {
@@ -20,8 +19,11 @@ div.column {
 }
 
 div.addingContent {
+	margin: 1ex;
 	float: right;
+	clear:right;
 	color: white;
+	margin-right: 20%
 }
 
 div {
@@ -36,10 +38,12 @@ div.demonstrator {
 	float: right;
 	height: 40%;
 	width: 40%;
-	position: relative;
-	top: -80%;
 	background: white;
 	overflow: auto;
+}
+
+div.time {
+	font-size:1.5ex;
 }
 
 h1.headline{
