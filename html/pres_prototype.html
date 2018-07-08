@@ -5,7 +5,11 @@
 	</head>
 
 	<body>
-		<h1>Scheduler Prototype</h1>
+		<button type="button"> < </button>
+		<h1>Scheduler Prototype</h1> 
+		<button type="button"> > </button><br><br>
+		<input id="date" type="date"> <button type="button">Go</button><br><br>
+		
 		<div class="playground" id="playground">
 			<div class="columncontainer">
 				<div class="column" id="times"></div>
@@ -14,28 +18,29 @@
 			<div class="demonstrator" id="demonstrator">
 			</div>
 			<div class="addingContent" id ="add">
-					Title: <input type="text" name="Title" id="Title"><br>
-					Initial Hour: <input type="text" name="initialHour" id="initialHour"><br>
-					Initial Minute: <input type="text" name="initialMinute" id="initialMinute"><br>
-					End Hour: <input type="text" name="endHour" id="endHour"><br>
-					End Minute: <input type="text" name="endMinute" id="endMinute"><br>
-					Description: <input type="text" name="description" id="description"><br>
-					Tags (Separadas por espaços): <input type="text" name"tag" id="tag"><br>
-					<button id="addButton">Insert</button>
-			</div>
+				<p>Data Insertion</p>
+				<div>
+					Title: <input id="title" type="text"><br>
+					Horas: <input id="initialHour" type="time"> - <input id="finalHour" type="time"><br>
+					Description: <input id="description" type="text"><br>
+					Color: <input id="color" type="color"><br>
+					Tags: <input id="tags" type="text"><br>
+					<button type="button" style="">Insert</button>
+				</div>
+			</div>		
 			<div class="addingContent" id="search">
-				Tag Search: <input type="text" name="tagSearch" id="tagSearch"><br>
-				<button id="searchButton">Search</button>
-			</div>			
-		</div>
-		<div>
-			Shtuff yo: <input type="text" id="consoleInput">
-			<button onclick="sendConsole()">Send command</button>
-			<button onclick="refresh()">Refresh display</button>
-		</div>
-		
+				<p>Tag Search</p>
+				<div>
+					Tag Search: <input type="text" name="tagSearch" id="tagSearch"><br>
+					<button id="searchButton">Search</button>
+				</div>
+			</div>	
+		</div>		
 		
 		<script src="js/js.js"></script>
 		<script src="js/interface.js"></script>
 	</body>
+	<footer>
+		<p>Lost?</p><a href="helpPage.html"> Click me!</a>
+	</footer>
 </html>
